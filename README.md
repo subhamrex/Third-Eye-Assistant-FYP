@@ -204,6 +204,11 @@ It is an Personal Assistant, capable to perform many tasks with some unique feat
 - Thank You  
 - I'm sorry  
 
+## Advance Commands
+- Object Detection
+- Face Mask Detection 
+
+
 
 ### To get started, run SECURITY.py file to register your face and to use it...  
 
