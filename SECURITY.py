@@ -9,7 +9,7 @@ from threading import Thread
 from userHandler import UserData
 import FACE_UNLOCKER as FU
 
-background, textColor = 'black', '#F6FAFB'
+background, textColor = 'black', '#c0e2eb'
 background, textColor = textColor, background
 
 avatarChoosen = 0
@@ -37,7 +37,7 @@ def startLogin():
 			user = UserData()
 			user.extractData()
 			userName = user.getName().split()[0]
-			welcLbl['text'] = 'Hi '+userName+',\nWelcome to the world of\nScience & Technology'
+			welcLbl['text'] = 'Hi '+userName
 			loginStatus['text'] = 'UNLOCKED'
 			loginStatus['fg'] = 'green'
 			faceStatus['text']='(Logged In)'
@@ -176,6 +176,7 @@ if __name__ == '__main__':
 	x, y = (s_width/2)-(w_width/2), (s_height/2)-(w_height/2)
 	root.geometry('%dx%d+%d+%d' % (w_width,w_height,x,y-30)) #center location of the screen
 	root.configure(bg=background)
+	root.resizable(False, False) # Disable resizing
 	# root.attributes('-toolwindow', True)
 	root1 = Frame(root, bg=background)
 	root2 = Frame(root, bg=background)
@@ -189,7 +190,7 @@ if __name__ == '__main__':
 	########  MAIN SCREEN  #########
 	################################
 
-	image1 = Image.open('extrafiles/images/home2.jpg')
+	image1 = Image.open('extrafiles/images/AIHome2.jpg')
 	image1 = image1.resize((300,250))
 	defaultImg1 = ImageTk.PhotoImage(image1)
 
@@ -199,7 +200,7 @@ if __name__ == '__main__':
 	logo.pack(padx=10, pady=10)
 
 	#welcome label
-	welcLbl = Label(root1, text='Hi there,\nWelcome to the world of\nScience & Technology', font=('Arial Bold', 15), fg='#303E54', bg=background)
+	welcLbl = Label(root1, text='Hi there', font=('Arial Bold', 15), fg='#303E54', bg=background)
 	welcLbl.pack(padx=10, pady=20)
 
 
@@ -223,7 +224,7 @@ if __name__ == '__main__':
 	########  FACE ADD SCREEN  #######
 	##################################
 
-	image2 = Image.open('extrafiles/images/defaultFace4.png')
+	image2 = Image.open('extrafiles/images/faceRec.png')
 	image2 = image2.resize((300, 250))
 	defaultImg2 = ImageTk.PhotoImage(image2)
 
@@ -266,7 +267,7 @@ if __name__ == '__main__':
 	agree = ttk.Checkbutton(userFrame2, text='I agree to use my Face for Security', style='Wild.TCheckbutton', takefocus=False, variable=agr)
 	agree.place(x=28, y=100)
 	#add face
-	addBtn = Button(userFrame2, text='    Add Face    ', font=('Arial Bold', 12), bg='#01933B', fg='white', command=Add_Face, relief=FLAT)
+	addBtn = Button(userFrame2, text='    Add Face    ', font=('Arial Bold', 12), bg='#44f1c2', fg='white', command=Add_Face, relief=FLAT)
 	addBtn.place(x=90, y=150)
 
 	#status of add face
@@ -334,7 +335,7 @@ if __name__ == '__main__':
 	avtb8.grid(row=3, column=1, ipadx=25, ipady=10)
 
 
-	Button(root3, text='         Submit         ', font=('Arial Bold', 15), bg='#01933B', fg='white', bd=0, relief=FLAT, command=SuccessfullyRegistered).pack()
+	Button(root3, text='         Submit         ', font=('Arial Bold', 15), bg='#44f1c2', fg='white', bd=0, relief=FLAT, command=SuccessfullyRegistered).pack()
 
 	#########################################
 	######## SUCCESSFULL REGISTRATION #######
@@ -350,6 +351,6 @@ if __name__ == '__main__':
 
 	Button(root4, text='     OK     ', bg='#0475BB', fg='white',font=('Arial Bold', 18), bd=0, relief=FLAT, command=lambda:quit()).pack(pady=50)
 
-	root.iconbitmap('extrafiles/images/assistant2.ico')
+	root.iconbitmap('extrafiles/images/assistant.ico')
 	raise_frame(root1)
 	root.mainloop()

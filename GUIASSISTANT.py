@@ -15,9 +15,9 @@ botChatText = "white"
 userChatTextBg = "#4da8da"
 
 chatBgColor = '#12232e'
-background = '#203647'
+background = '#cc99ff'
 textColor = 'white'
-AITaskStatusLblBG = '#203647'
+AITaskStatusLblBG = '#99d8ea'  # Task Bar color
 KCS_IMG = 1 #0 for light, 1 for dark
 voice_id = 0 #0 for female, 1 for male
 ass_volume = 1 #max volume
@@ -37,8 +37,10 @@ try:
 	import dictionary
 	import ToDo
 	import fileHandler
-	from Utils.ObjDetection_v2.Object_detection_NMS import ObjectDetection  # Added
-	from Utils.motion_detector.motion import motion_det  # Added
+	from Utils.ObjDetection_v2.Object_detection_NMS import ObjectDetection  # Added object detection
+	from Utils.motion_detector.motion import motion_det  # Added motion detection
+	from Utils.mask_detection.detect_mask_video import mask_detection # Added mask detection
+
 except Exception as e:
 	raise e
 
@@ -121,7 +123,7 @@ def getChatColor():
 def changeTheme():
 	global background, textColor, AITaskStatusLblBG, KCS_IMG, botChatText, botChatTextBg, userChatTextBg, chatBgColor
 	if themeValue.get()==1:
-		background, textColor, AITaskStatusLblBG, KCS_IMG = "#203647", "white", "#203647",1
+		background, textColor, AITaskStatusLblBG, KCS_IMG = "#99d8ea", "white", "#99d8ea",1
 		cbl['image'] = cblDarkImg
 		kbBtn['image'] = kbphDark
 		settingBtn['image'] = sphDark
@@ -517,8 +519,18 @@ def main(text):
 			if mot == "Movement":
 				speak("There was a movement",True)
 			else:
-				speak("There was no movement",True)
+				speak("There was no movement",True)  ## Added motion detection
 			return
+
+		if 'mask detection' in text:
+			mask = mask_detection()
+			speak("Detecting mask...",True)	
+			if mask == 1:
+				speak("User wears mask",True)
+			else:
+				speak("User does not have mask.\n Please wear mask.",True)  ## Added mask detection
+			return
+
 
 
 		if isContain(text, ['voice']):
@@ -587,8 +599,8 @@ def showSingleImage(type, data=None):
 		img0 = ImageTk.PhotoImage(Image.open('Downloads/0.jpg').resize((90,110), Image.ANTIALIAS))
 	except:
 		pass
-	img1 = ImageTk.PhotoImage(Image.open('extrafiles/images/heads.jpg').resize((220,200), Image.ANTIALIAS))
-	img2 = ImageTk.PhotoImage(Image.open('extrafiles/images/tails.jpg').resize((220,200), Image.ANTIALIAS))
+	img1 = ImageTk.PhotoImage(Image.open('extrafiles/images/head.jpg').resize((220,200), Image.ANTIALIAS))
+	img2 = ImageTk.PhotoImage(Image.open('extrafiles/images/tail.jpg').resize((220,200), Image.ANTIALIAS))
 	img4 = ImageTk.PhotoImage(Image.open('extrafiles/images/WeatherImage.png'))
 
 	if type=="weather":
@@ -735,9 +747,9 @@ def destroySplash():
 
 if __name__ == '__main__':
 	splash_root = Tk()
-	splash_root.configure(bg='#3895d3')
+	splash_root.configure(bg='#59bb97')
 	splash_root.overrideredirect(True)
-	splash_label = Label(splash_root, text="Processing...", font=('montserrat',15),bg='#3895d3',fg='white')
+	splash_label = Label(splash_root, text="Processing...", font=('montserrat',15),bg='#59bb97',fg='white')
 	splash_label.pack(pady=40)
 	# splash_percentage_label = Label(splash_root, text="0 %", font=('montserrat',15),bg='#3895d3',fg='white')
 	# splash_percentage_label.pack(pady=(0,10))
@@ -753,6 +765,7 @@ if __name__ == '__main__':
 
 	root = Tk()
 	root.title('Third Eye')
+	root.resizable(False, False) ## Disable Resizing
 	w_width, w_height = 400, 650
 	s_width, s_height = root.winfo_screenwidth(), root.winfo_screenheight()
 	x, y = (s_width/2)-(w_width/2), (s_height/2)-(w_height/2)
@@ -777,11 +790,11 @@ if __name__ == '__main__':
 	chat_frame.pack(padx=10)
 	chat_frame.pack_propagate(0)
 
-	bottomFrame1 = Frame(root1, bg='#dfdfdf', height=100)
+	bottomFrame1 = Frame(root1, bg='#c0e2eb', height=100)
 	bottomFrame1.pack(fill=X, side=BOTTOM)
-	VoiceModeFrame = Frame(bottomFrame1, bg='#dfdfdf')
+	VoiceModeFrame = Frame(bottomFrame1, bg='#c0e2eb')
 	VoiceModeFrame.pack(fill=BOTH)
-	TextModeFrame = Frame(bottomFrame1, bg='#dfdfdf')
+	TextModeFrame = Frame(bottomFrame1, bg='#c0e2eb')
 	TextModeFrame.pack(fill=BOTH)
 
 	# VoiceModeFrame.pack_forget()
@@ -791,49 +804,49 @@ if __name__ == '__main__':
 	cblDarkImg = PhotoImage(file='extrafiles/images/centralButton1.png')
 	if KCS_IMG==1: cblimage=cblDarkImg
 	else: cblimage=cblLightImg
-	cbl = Label(VoiceModeFrame, fg='white', image=cblimage, bg='#dfdfdf')
+	cbl = Label(VoiceModeFrame, fg='white', image=cblimage, bg='#c0e2eb')
 	cbl.pack(pady=17)
 	AITaskStatusLbl = Label(VoiceModeFrame, text='    Offline', fg='white', bg=AITaskStatusLblBG, font=('montserrat', 16))
 	AITaskStatusLbl.place(x=140,y=32)
 	
 	#Settings Button
-	sphLight = PhotoImage(file = "extrafiles/images/setting.png")
+	sphLight = PhotoImage(file = "extrafiles/images/setting2.png")
 	sphLight = sphLight.subsample(2,2)
-	sphDark = PhotoImage(file = "extrafiles/images/setting1.png")
+	sphDark = PhotoImage(file = "extrafiles/images/settings.png")  # Icon Changed 
 	sphDark = sphDark.subsample(2,2)
 	if KCS_IMG==1: sphimage=sphDark
 	else: sphimage=sphLight
-	settingBtn = Button(VoiceModeFrame,image=sphimage,height=30,width=30, bg='#dfdfdf',borderwidth=0,activebackground="#dfdfdf",command=lambda: raise_frame(root2))
+	settingBtn = Button(VoiceModeFrame,image=sphimage,height=30,width=30, bg='#c0e2eb',borderwidth=0,activebackground="#c0e2eb",command=lambda: raise_frame(root2))
 	settingBtn.place(relx=1.0, y=30,x=-20, anchor="ne")	
 	
 	#Keyboard Button
 	kbphLight = PhotoImage(file = "extrafiles/images/keyboard.png")
 	kbphLight = kbphLight.subsample(2,2)
-	kbphDark = PhotoImage(file = "extrafiles/images/keyboard1.png")
+	kbphDark = PhotoImage(file = "extrafiles/images/keyboard2.png")
 	kbphDark = kbphDark.subsample(2,2)
 	if KCS_IMG==1: kbphimage=kbphDark
 	else: kbphimage=kbphLight
-	kbBtn = Button(VoiceModeFrame,image=kbphimage,height=30,width=30, bg='#dfdfdf',borderwidth=0,activebackground="#dfdfdf", command=changeChatMode)
+	kbBtn = Button(VoiceModeFrame,image=kbphimage,height=30,width=30, bg='#c0e2eb',borderwidth=0,activebackground="#c0e2eb", command=changeChatMode)
 	kbBtn.place(x=25, y=30)
 
 	#Mic
-	micImg = PhotoImage(file = "extrafiles/images/mic.png")
+	micImg = PhotoImage(file = "extrafiles/images/microphone.png")
 	micImg = micImg.subsample(2,2)
-	micBtn = Button(TextModeFrame,image=micImg,height=30,width=30, bg='#dfdfdf',borderwidth=0,activebackground="#dfdfdf", command=changeChatMode)
+	micBtn = Button(TextModeFrame,image=micImg,height=30,width=30, bg='#c0e2eb',borderwidth=0,activebackground="#c0e2eb", command=changeChatMode)
 	micBtn.place(relx=1.0, y=30,x=-20, anchor="ne")	
 	
 	#Text Field
 	TextFieldImg = PhotoImage(file='extrafiles/images/textField.png')
-	UserFieldLBL = Label(TextModeFrame, fg='white', image=TextFieldImg, bg='#dfdfdf')
+	UserFieldLBL = Label(TextModeFrame, fg='white', image=TextFieldImg, bg='#c0e2eb')
 	UserFieldLBL.pack(pady=17, side=LEFT, padx=10)
-	UserField = Entry(TextModeFrame, fg='white', bg='#203647', font=('Montserrat', 16), bd=6, width=22, relief=FLAT)
-	UserField.place(x=20, y=30)
+	UserField = Entry(TextModeFrame, fg='white', bg='#99d8ea', font=('Montserrat', 16), bd=6, width=22, relief=FLAT)
+	UserField.place(x=20, y=30) #
 	UserField.insert(0, "Ask me anything...")
 	UserField.bind('<Return>', keyboardInput)
 	
 	#User and Bot Icon
 	userIcon = PhotoImage(file="extrafiles/images/avatars/ChatIcons/a"+str(ownerPhoto)+".png")
-	botIcon = PhotoImage(file="extrafiles/images/assistant2.png")
+	botIcon = PhotoImage(file="extrafiles/images/assistant.png")
 	botIcon = botIcon.subsample(2,2)
 	
 
@@ -905,7 +918,7 @@ if __name__ == '__main__':
 
 	chooseChatLbl = Label(settingsFrame, text='Chat Background', font=('Arial', 13), fg=textColor, bg=background)
 	chooseChatLbl.place(x=0,y=180)
-	cimg = PhotoImage(file = "extrafiles/images/colorchooser.png")
+	cimg = PhotoImage(file = "extrafiles/images/color-picker2.png")
 	cimg = cimg.subsample(3,3)
 	colorbar = Label(settingsFrame, bd=3, width=18, height=1, bg=chatBgColor)
 	colorbar.place(x=150, y=180)
@@ -928,6 +941,6 @@ if __name__ == '__main__':
 	except Exception as e:
 		print('System is Offline...')
 	
-	root.iconbitmap('extrafiles/images/assistant2.ico')
+	root.iconbitmap('extrafiles/images/assistant.ico')
 	raise_frame(root1)
 	root.mainloop()
