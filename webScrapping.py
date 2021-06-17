@@ -241,9 +241,9 @@ def youtube(query):
 	query = query.replace('play',' ')
 	query = query.replace('on youtube',' ')
 	query = query.replace('youtube',' ')
-	print("Pahuch Gya")
+	
 	results = YoutubeSearch(query,max_results=1).to_dict()
-	print("Link mil gya")
+	
 	webbrowser.open('https://www.youtube.com/watch?v=' + results[0]['id'])
 	return "Enjoy Sir..."
 
@@ -267,7 +267,7 @@ def sendWhatsapp(phone_no='',message=''):
 	k = Controller()
 	k.press(Key.enter)
 
-def email(rec_email=None, text="Hello, It's F.R.I.D.A.Y. here...", sub='F.R.I.D.A.Y.'):
+def email(rec_email=None, text="Hello, It's Third Eye here...", sub='Third Eye'):
 	if '@gmail.com' not in rec_email: return
 	s = smtplib.SMTP('smtp.gmail.com', 587)
 	s.starttls()
