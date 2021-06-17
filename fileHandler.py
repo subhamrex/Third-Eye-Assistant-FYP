@@ -20,15 +20,15 @@ def createFile(text):
 	
 	if isContain(text, ["ppt","power point","powerpoint"]):
 		file_name = "sample_file.ppt"
-		appLocation = "C:\\Program Files (x86)\\Microsoft Office\\Office15\\POWERPNT.exe"
+		appLocation = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.exe"
 
 	elif isContain(text, ['excel','spreadsheet']):
 		file_name = "sample_file.xsl"
-		appLocation = "C:\\Program Files (x86)\\Microsoft Office\\Office15\\EXCEL.EXE"
+		appLocation = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\EXCEL.EXE"
 
 	elif isContain(text, ['word','document']):
 		file_name = "sample_file.docx"
-		appLocation = "C:\\Program Files (x86)\\Microsoft Office\\Office15\\WINWORD.EXE"
+		appLocation = "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE"
 
 	elif isContain(text, ["text","simple","normal"]): file_name = "sample_file.txt"
 	elif "python" in text: file_name = "sample_file.py"
