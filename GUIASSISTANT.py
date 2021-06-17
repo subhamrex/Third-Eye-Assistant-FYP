@@ -38,7 +38,7 @@ try:
 	import ToDo
 	import fileHandler
 	from Utils.ObjDetection_v2.Object_detection_NMS import ObjectDetection  # Added
-	from motion_detector.motion import motion_det  # Added
+	from Utils.motion_detector.motion import motion_det  # Added
 except Exception as e:
 	raise e
 
