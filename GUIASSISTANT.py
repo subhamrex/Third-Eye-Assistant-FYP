@@ -505,7 +505,7 @@ def main(text):
 			speak('Your name is, ' + ownerName, True, True)
 			return
 
-		if 'object detection' in text:
+		if 'object detection mode' in text:
 			obj = ObjectDetection()
 			obj_res = obj.obj_detection_v2()
 			speak("Detecting Objects....",True)
@@ -513,7 +513,7 @@ def main(text):
 				speak(f'{i}',True)   ## Added object detection
 			return 
 
-		if 'motion detection' in text:
+		if 'motion detection mode' in text:
 			mot = motion_det()
 			speak("Detecting motion...",True)	
 			if mot == "Movement":
@@ -522,7 +522,7 @@ def main(text):
 				speak("There was no movement",True)  ## Added motion detection
 			return
 
-		if 'mask detection' in text:
+		if 'mask detection mode' in text:
 			mask = mask_detection()
 			speak("Detecting mask...",True)	
 			if mask == 1:
