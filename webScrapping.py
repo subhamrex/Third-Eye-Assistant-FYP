@@ -263,7 +263,7 @@ def sendWhatsapp(phone_no='',message=''):
 	webbrowser.open('https://web.whatsapp.com/send?phone='+phone_no+'&text='+message)
 	import time
 	from pynput.keyboard import Key, Controller
-	time.sleep(10)
+	time.sleep(10) # 10 to 15
 	k = Controller()
 	k.press(Key.enter)
 
