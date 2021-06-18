@@ -7,6 +7,9 @@ import time
 import cv2
 import os
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # Hide Logs
+
+
 
 def mask_detection():
 	# load our serialized face detector model from disk
