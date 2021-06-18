@@ -810,7 +810,7 @@ if __name__ == '__main__':
 	AITaskStatusLbl.place(x=140,y=32)
 	
 	#Settings Button
-	sphLight = PhotoImage(file = "extrafiles/images/setting2.png")
+	sphLight = PhotoImage(file = "extrafiles/images/settings.png")
 	sphLight = sphLight.subsample(2,2)
 	sphDark = PhotoImage(file = "extrafiles/images/settings.png")  # Icon Changed 
 	sphDark = sphDark.subsample(2,2)
@@ -820,7 +820,7 @@ if __name__ == '__main__':
 	settingBtn.place(relx=1.0, y=30,x=-20, anchor="ne")	
 	
 	#Keyboard Button
-	kbphLight = PhotoImage(file = "extrafiles/images/keyboard.png")
+	kbphLight = PhotoImage(file = "extrafiles/images/keyboard2.png")
 	kbphLight = kbphLight.subsample(2,2)
 	kbphDark = PhotoImage(file = "extrafiles/images/keyboard2.png")
 	kbphDark = kbphDark.subsample(2,2)
@@ -865,7 +865,7 @@ if __name__ == '__main__':
 	userPhoto.pack(pady=(20, 5))
 
 	#Change Photo
-	chngPh = ImageTk.PhotoImage(Image.open("extrafiles/images/avatars/changephoto2.png").resize((120, 120)))
+	chngPh = ImageTk.PhotoImage(Image.open("extrafiles/images/avatars/image.png").resize((120, 120)))
 	
 	userPhoto.bind('<Enter>', onhover)
 	userPhoto.bind('<Leave>', onleave)
