@@ -1,13 +1,13 @@
 # import the necessary packages
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # Hide Logs
 from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras.models import load_model
 import numpy as np
 import time
 import cv2
-import os
 
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' # Hide Logs
 
 
 
