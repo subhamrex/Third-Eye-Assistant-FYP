@@ -406,7 +406,7 @@ def main(text):
 				speak('Here you go...', True, True)
 			return
 
-		if isContain(text, ['factorial','log','value of','math',' + ',' - ',' x ','multiply','divided by','binary','hexadecimal','octal','shift','sin ','cos ','tan ']):
+		if isContain(text, ['factorial','log','plus','value of','math',' + ',' - ',' x ','multiply','divided by','binary','hexadecimal','octal','shift','sin ','cos ','tan ']):
 			try:
 				speak(('Result is: ' + math_function.perform(text)), True, True)
 			except Exception as e:

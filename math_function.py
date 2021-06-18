@@ -5,6 +5,7 @@ def basicOperations(text):
 		num = int(text[temp+1:])
 		return round(math.sqrt(num),2)
 
+	text = text.replace('one','1 ') # Added Special case
 	text = text.replace('plus', '+')
 	text = text.replace('minus', '-')
 	text = text.replace('x', '*')
